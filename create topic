@@ -1,0 +1,13 @@
+Create topics:
+
+airports:
+./bin/kafka-topics.sh --create --zookeeper assist-namenode001:2181 --topic airports --partitions 1 --replication-factor 1
+
+Carriers:
+./bin/kafka-topics.sh --create --zookeeper assist-namenode001:2181 --topic carriers --partitions 1 --replication-factor 1
+
+Planedate:
+./bin/kafka-topics.sh --create --zookeeper assist-namenode001:2181 --topic planedate --partitions 1 --replication-factor 1
+
+OTP:
+./bin/kafka-topics.sh --create --zookeeper assist-namenode001:2181 --topic otp --partitions 1 --replication-factor 1
