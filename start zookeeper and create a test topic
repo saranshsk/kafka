@@ -1,0 +1,46 @@
+assist@assist-namenode001:/usr/local/kafka/kafka_2.11-1.0.1$ ./bin/zookeeper-server-start.sh -daemon config/zookeeper.properties
+assist@assist-namenode001:/usr/local/kafka/kafka_2.11-1.0.1$ jps
+5633 Jps
+5191 Kafka
+3272 SecondaryNameNode
+4761 QuorumPeerMain
+3434 ResourceManager
+3036 NameNode
+/usr/local/kafka/kafka_2.11-1.0.1$ ./bin/kafka-topics.sh --create --zookeeper assist-namenode001:2181 --topic test-topic --partitions 2 --replication-factor 2
+Created topic "test-topic".
+
+sudo scp -r assist@assist-namenode001:/usr/local/kafka/* /usr/local/
+
+./bin/kafka-server-start.sh -daemon config/server.properties
+
+assist@assist-namenode001:/usr/local/kafka/kafka_2.11-1.0.1$ ./bin/kafka-topics.sh --create --zookeeper assist-namenode001:2181 --topic test-topic --partitions 2 --replication-factor 2
+Created topic "test-topic".
+assist@assist-namenode001:/usr/local/kafka/kafka_2.11-1.0.1$ ./bin/kafka-console-producer.sh --broker-list assist-namenode001:9092 --topic test-topic
+>Hello there
+>How are you?
+>This is my Kafka stream
+>Hve you all received the msg
+
+datanode machine:
+assist@assist-datanode001:/usr/local/kafka/kafka_2.11-1.0.1$ jps
+4533 Kafka
+3910 QuorumPeerMain
+2543 DataNode
+4607 Jps
+assist@assist-datanode001:/usr/local/kafka/kafka_2.11-1.0.1$ ./bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test-topic --from-beginning
+Using the ConsoleConsumer with old consumer is deprecated and will be removed in a future major release. Consider using the new consumer by passing [bootstrap-server] instead of [zookeeper].
+No brokers found in ZK.
+assist@assist-datanode001:/usr/local/kafka/kafka_2.11-1.0.1$ ./bin/kafka-console-consumer.sh --zookeeper assist-namenode001:2181 --topic test-topic --from-beginning
+Using the ConsoleConsumer with old consumer is deprecated and will be removed in a future major release. Consider using the new consumer by passing [bootstrap-server] instead of [zookeeper].
+How are you?
+Hello there
+This is my Kafka stream
+Hve you all received the msg
+
+namenode:
+assist@assist-namenode001:/usr/local/kafka/kafka_2.11-1.0.1$ ./bin/kafka-console-consumer.sh --zookeeper assist-namenode001:2181 --topic test-topic --from-beginning
+Using the ConsoleConsumer with old consumer is deprecated and will be removed in a future major release. Consider using the new consumer by passing [bootstrap-server] instead of [zookeeper].
+How are you?
+Hello there
+This is my Kafka stream
+Hve you all received the msg
