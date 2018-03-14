@@ -1,0 +1,13 @@
+Uploading data files to the topics:
+
+airports:
+./bin/kafka-console-producer.sh --broker-list assist-namenode001:9092 --topic airports < /home/assist/Downloads/airports.csv
+
+Carriers:
+./bin/kafka-console-producer.sh --broker-list assist-namenode001:9092 --topic carriers < /home/assist/Downloads/carriers.csv
+
+Planedate:
+./bin/kafka-console-producer.sh --broker-list assist-namenode001:9092 --topic planedate < /home/assist/Downloads/plane-data.csv
+
+OTP:
+./bin/kafka-console-producer.sh --broker-list assist-namenode001:9092 --topic otp < /home/assist/Downloads/airports.csv
