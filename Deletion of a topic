@@ -1,0 +1,29 @@
+Deletion of a topic:
+Deletion of a topic has been supported since 0.8.2.x version. You have to enable topic deletion (setting delete.topic.enable to true) on all brokers first.
+
+Follow this step by step process for manual deletion of topics
+
+    Stop Kafka server
+    Delete the topic directory with rm -rf command
+
+    Connect to Zookeeper instance: zookeeper-shell.sh host:port
+
+    ls /brokers/topics
+    Remove the topic folder from ZooKeeper using rmr /brokers/topics/yourtopic
+    Restart Kafka server
+    Confirm if it was deleted or not by using this command kafka-topics.sh --list --zookeeper host:port
+
+or
+
+
+You can use below command to check the list of topics available in Zookeeper.
+
+bin/kafka-topics.sh --list --zookeeper localhost:2181
+
+Also set the below properties in server.properties
+
+delete.topic.enable=true 
+
+Then try to delete the topic using
+
+bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic test
