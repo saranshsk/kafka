@@ -1,0 +1,6 @@
+Kafka console display as consumer:
+
+./bin/kafka-console-consumer.sh --zookeeper assist-namenode001:2181 --topic airports --from-beginning
+./bin/kafka-console-consumer.sh --zookeeper assist-namenode001:2181 --topic carriers --from-beginning
+./bin/kafka-console-consumer.sh --zookeeper assist-namenode001:2181 --topic planedate --from-beginning
+./bin/kafka-console-consumer.sh --zookeeper assist-namenode001:2181 --topic otp --from-beginning
